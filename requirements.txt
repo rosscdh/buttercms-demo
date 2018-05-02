@@ -1,0 +1,2 @@
+buttercms-python==1.0
+django==2.0.5
