@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.conf import settings
 from django.views.generic import TemplateView
 
@@ -11,9 +12,16 @@ class ContentView(TemplateView):
     butter_type = None
 
     def get_template_names(self):
-        return 'butter/{}.html'.format(self.butter_type)
+        templates = ['butter/{}.html'.format(self.butter_type)]
+        if self.template_name:
+            templates.insert(0, self.template_name)
+        return templates
 
     def render_to_response(self, context, **response_kwargs):
         butter = self.client.pages.get(self.butter_type, self.kwargs.get('slug'))
-        context['object'] = butter.get('data', {}).get('fields', {})
+        try:
+            context['object'] = butter.get('data', {}).get('fields', {})
+        except Exception as e:
+            raise Http404("An error occurred: {}".format(butter))
+
         return super(ContentView, self).render_to_response(context, **response_kwargs)
