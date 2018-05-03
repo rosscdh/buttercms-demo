@@ -19,6 +19,10 @@ class ContentView(TemplateView):
 
     def render_to_response(self, context, **response_kwargs):
         butter = self.client.pages.get(self.butter_type, self.kwargs.get('slug'))
+
+        if 'page not found' in butter.get('detail', '').lower():
+            raise Http404("An error occurred: {}".format(butter))
+
         try:
             context['object'] = butter.get('data', {}).get('fields', {})
         except Exception as e:
