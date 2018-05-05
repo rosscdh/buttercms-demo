@@ -1,6 +1,6 @@
 # ButterCMS - Basic Django Module
 
-*Simple Gneeric view helpers to get access to your butter content.*
+*Simple Django Generic Views to get access to your butter content.*
 
 
 ### Usage
