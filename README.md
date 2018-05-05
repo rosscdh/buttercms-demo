@@ -5,13 +5,13 @@
 
 ### Usage
 
+**settings**
+
 ```settings.py
 BUTTER_CMS = {
     'KEY': os.getenv('BUTTER_CMS_KEY')
 }
 ```
-
-### Usage
 
 
 **Page Detail**
@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^blog/$', ButterBlogsListView.as_view(), name='blog_list'),
 ]
 
-http://localhost:8000/b/hugo-boss/  # where hugo-boss is your slug in butter-cms
+http://localhost:8000/blog/
 ```
 
 
@@ -50,6 +50,6 @@ urlpatterns = [
     url(r'^blog/(?P<slug>.*)/$', ButterBlogDetailView.as_view(), name='blog_detail'),
 ]
 
-http://localhost:8000/blog/hugo-boss/  # where hugo-boss is your slug in butter-cms
+http://localhost:8000/blog/what-a-wonderful-time-in-the-sun/
 ```
 
