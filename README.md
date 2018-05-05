@@ -1,6 +1,6 @@
 # ButterCMS - Basic Django Module
 
-*Simple Gneeric view helpers to get access to your butter content.*
+*Simple Django Generic Views to get access to your butter content.*
 
 
 ### Usage
@@ -14,7 +14,29 @@ BUTTER_CMS = {
 ```
 
 
+**Page List**
+
+**Template**
+
+*butter/pages_list.html*
+
+```urls.py
+from butter.views import ButterPageListView
+
+urlpatterns = [
+    # where `brand_overview` is the page type you defined in butter-cms
+    url(r'^b/(?P<slug>.*)/$', ButterPageListView.as_view(butter_type='brand_overview'), name='brand_overview'),
+]
+
+http://localhost:8000/b/hugo-boss/  # where hugo-boss is your slug in butter-cms
+```
+
+
 **Page Detail**
+
+**Template**
+
+*butter/pages_detail.html*
 
 ```urls.py
 from butter.views import ButterPageDetailView
@@ -30,6 +52,10 @@ http://localhost:8000/b/hugo-boss/  # where hugo-boss is your slug in butter-cms
 
 **Blog List**
 
+**Template**
+
+*butter/posts_list.html*
+
 ```urls.py
 from butter.views import ButterBlogListView
 
@@ -42,6 +68,10 @@ http://localhost:8000/blog/
 
 
 **Blog Detail**
+
+**Template**
+
+*butter/posts_detail.html*
 
 ```urls.py
 from butter.views import ButterBlogDetailView
