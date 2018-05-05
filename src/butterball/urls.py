@@ -19,5 +19,5 @@ from django.contrib import admin
 from content import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^b/(?P<slug>.*)/$', views.ContentView.as_view(butter_type='brand_overview'), name='brand_overview'),
+    url(r'^b/(?P<slug>.*)/$', views.ButterPageDetailView.as_view(butter_type='brand_overview'), name='brand_overview'),
 ]
