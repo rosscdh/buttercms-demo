@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <title>{{object.seo_title}}</title>
+    <meta property="og:title" content="{{case_study.facebook_open_graph_title}}" /> 
+  </head>
+  <body>
+    <h1>{{ object.title }}</h1>
+    <img width="100%" src="{{ object.logo }}">
+    <div>{{ object.body|safe }}</div>
+  </body>
+</html>

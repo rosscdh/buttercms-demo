@@ -9,10 +9,10 @@ butter_client = ButterCMS(settings.BUTTER_CMS.get('KEY'))
 
 class ButterPageDetailView(TemplateView):
     client = butter_client
-    butter_type = None
+    butter_type = 'pages'
 
     def get_template_names(self):
-        templates = ['butter/{}.html'.format(self.butter_type)]
+        templates = ['butter/{}_detail.html'.format(self.butter_type)]
         if self.template_name:
             templates.insert(0, self.template_name)
         return templates
@@ -32,6 +32,13 @@ class ButterPageDetailView(TemplateView):
             raise Http404("An error occurred: {}".format(butter))
 
         return super(ButterPageDetailView, self).render_to_response(context, **response_kwargs)
+
+
+class ButterBlogDetailView(ButterPageDetailView):
+    butter_type = 'posts'
+
+    def get_butter(self):
+        return getattr(self.client, self.butter_type).get(self.kwargs.get('slug'))
 
 
 class ButterGenericListView(TemplateView):
@@ -65,9 +72,3 @@ class ButterPageListView(ButterGenericListView):
 class ButterBlogListView(ButterGenericListView):
     butter_type = 'posts'
 
-
-class ButterBlogDetailView(ButterPageDetailView):
-    butter_type = 'posts'
-
-    def get_butter(self):
-        return getattr(self.client, self.butter_type).get(self.kwargs.get('slug'))
